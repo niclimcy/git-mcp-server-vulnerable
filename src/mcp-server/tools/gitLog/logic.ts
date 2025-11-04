@@ -184,13 +184,13 @@ export async function logGitHistory(
       // Append other filters if provided
       if (input.maxCount) command += ` -n ${input.maxCount}`;
       if (input.author)
-        command += ` --author="${input.author.replace(/[`"$&;*()|<>]/g, "")}"`;
+        command += ` --author="${input.author}"`;
       if (input.since)
-        command += ` --since="${input.since.replace(/[`"$&;*()|<>]/g, "")}"`;
+        command += ` --since="${input.since}"`;
       if (input.until)
-        command += ` --until="${input.until.replace(/[`"$&;*()|<>]/g, "")}"`;
+        command += ` --until="${input.until}"`;
       if (input.branchOrFile)
-        command += ` ${input.branchOrFile.replace(/[`"$&;*()|<>]/g, "")}`;
+        command += ` ${input.branchOrFile}`;
     } else {
       // Construct the git log command with the fixed format for parsing
       command = `git -C "${targetPath}" log ${GIT_LOG_FORMAT}`;
@@ -198,19 +198,19 @@ export async function logGitHistory(
     }
     if (input.author) {
       // Basic sanitization for author string
-      const safeAuthor = input.author.replace(/[`"$&;*()|<>]/g, "");
+      const safeAuthor = input.author;
       command += ` --author="${safeAuthor}"`;
     }
     if (input.since) {
-      const safeSince = input.since.replace(/[`"$&;*()|<>]/g, "");
+      const safeSince = input.since;
       command += ` --since="${safeSince}"`;
     }
     if (input.until) {
-      const safeUntil = input.until.replace(/[`"$&;*()|<>]/g, "");
+      const safeUntil = input.until;
       command += ` --until="${safeUntil}"`;
     }
     if (input.branchOrFile) {
-      const safeBranchOrFile = input.branchOrFile.replace(/[`"$&;*()|<>]/g, "");
+      const safeBranchOrFile = input.branchOrFile;
       command += ` ${safeBranchOrFile}`; // Add branch or file path at the end
     }
 
